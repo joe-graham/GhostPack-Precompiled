@@ -79,7 +79,7 @@ jobs:
       run: |
         PWDROOT=$(pwd -P)
         mkdir -p ./Artifacts
-        for pkg in Certify ForgeCert Koh Lockless RestrictedAdmin Rubeus SafetyKatz Seatbelt SharpDPAPI SharpDump SharpUp SharpWMI # Skipping KeeThief/DecryptionShellcode KeeThief/KeeTheft KeeThief/KeePass-2.34-Source-Patched
+        for pkg in Certify ForgeCert Koh Lockless RestrictedAdmin Rubeus SafetyKatz Seatbelt SharpDPAPI SharpDump SharpUp SharpWMI Snaffler # Skipping KeeThief/DecryptionShellcode KeeThief/KeeTheft KeeThief/KeePass-2.34-Source-Patched
         do
           cd $pkg
 
