@@ -37,3 +37,6 @@
 [submodule "SharpWMI"]
 	path = SharpWMI
 	url = https://github.com/GhostPack/SharpWMI
+[submodule "Snaffler"]
+	path = Snaffler
+	url = https://github.com/SnaffCon/Snaffler.git
