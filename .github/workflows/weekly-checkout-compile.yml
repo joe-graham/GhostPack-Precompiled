@@ -77,20 +77,19 @@ jobs:
       if: ${{ steps.update_sync.outputs.changed == 'true' || github.event.inputs.publish == 'true' }}
       shell: bash
       run: |
+        set -x
         PWDROOT=$(pwd -P)
         mkdir -p ./Artifacts
         for pkg in Certify ForgeCert Koh Lockless RestrictedAdmin Rubeus SafetyKatz Seatbelt SharpDPAPI SharpDump SharpUp SharpWMI Snaffler # Skipping KeeThief/DecryptionShellcode KeeThief/KeeTheft KeeThief/KeePass-2.34-Source-Patched
         do
-          set -x
           cd $pkg
-          echo $pkg
 
           msbuild.exe -t:restore -p:Configuration=Release -p:RestorePackagesConfig=true
           find . -name "*.csproj" -exec sed -i 's/<TargetFrameworkVersion>v.*<\/TargetFrameworkVersion>/<TargetFrameworkVersion>v4.8<\/TargetFrameworkVersion>/' {} +
           find . -name "*.csproj" -exec sed -i 's|</Project>||' {} + -exec sed -i '$r ../obfuscar-template.patch' {} + -exec sed -i '$a </Project>' {} +
           
           nuget restore *.sln
-          if [ "$pkg" = "Snaffler" ]; then
+          if [[ "$pkg" == "Snaffler" ]]; then
             msbuild.exe Snaffler.sln -p:Configuration=Release -p:DebugType=None -p:DebugSymbols=false
           else
             msbuild.exe *.sln -p:Configuration=Release -p:DebugType=None -p:DebugSymbols=false
